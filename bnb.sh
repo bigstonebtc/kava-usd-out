@@ -9,18 +9,18 @@ a=0
 while [ $a -lt 720 ]
 do
 
-# BNBチェーンからBNBブリッジの残高を取得します
+# BNBチェーンからkava BEP3ブリッジのBUSD残高を取得します
 JSONDATA=`bnbcli account bnb10zq89008gmedc6rrwzdfukjk94swynd7dl97w8 --chain-id Binance-Chain-Tigris --node https://dataseed5.defibit.io:443`
 
 echo $JSONDATA
 
 bnbamount=$(echo $JSONDATA | jq -r '.value.base.coins[1].amount';)
 
-# この残高以上があればアラートしてほしいという残高を設定してください。単位は1億分の1 BNBです。つまり、1BNB=100000000です。
+# この残高以上があればアラートしてほしいという残高を設定してください。単位は1億分の1 BUSDです。つまり、1BUSD=100000000です。
 holdings="100000000"
 
 echo "amount" $bnbamount
-echo $(( $bnbamount / 100000000)) "BNB"
+echo $(( $bnbamount / 100000000)) "BUSD"
 
 
 if [ "$bnbamount" -gt "$holdings" ]
@@ -28,7 +28,7 @@ if [ "$bnbamount" -gt "$holdings" ]
 then 
 #アラート
 
-echo "Your BNB Found ! Your BNB Found ! Your BNB Found !"
+echo "Your BUSD Found ! Your BUSD Found ! Your BUSD Found !"
 
 
 #以下BNBが見つかった場合の処理を書いてください。サンプルではサウンドファイルを鳴らしています。適当なサウンドファイルのパスを記入ください
